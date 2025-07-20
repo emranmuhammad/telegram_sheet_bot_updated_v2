@@ -7,13 +7,20 @@ from telegram.ext import (
     ConversationHandler, ContextTypes, filters
 )
 from google.oauth2.service_account import Credentials
+import os
+from dotenv import load_dotenv
+import json
+load_dotenv()
 
-BOT_TOKEN = "7956550370:AAFzMaGar62ddruyMAfbzG2_kfi14m9f-U0"
-SHEET_ID = "1AiC1SpMsZYg1-XEPYVzT2yx08xUZuZgws6HIeSEhwxM"
-CREDS_FILE = "credentials/credentials.json"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+SHEET_ID = os.getenv("SHEET_ID")
+CREDS_JSON = os.getenv("CREDS_JSON")
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
-creds = Credentials.from_service_account_file(CREDS_FILE, scopes=SCOPES)
+creds_dict = json.loads(CREDS_JSON)
+
+
+creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
 client = gspread.authorize(creds)
 sheet = client.open_by_key(SHEET_ID).sheet1
 
