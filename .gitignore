@@ -1,2 +1,4 @@
 credentials/credentials.json
 .env
+venv/
+credentials.json
