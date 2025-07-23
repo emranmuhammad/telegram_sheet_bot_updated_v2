@@ -26,7 +26,7 @@ creds_dict = {
     "client_x509_cert_url": os.getenv("GOOGLE_CLIENT_CERT_URL"),
     "universe_domain": os.getenv("GOOGLE_UNIVERSE_DOMAIN")
 }
-
+print(creds_dict)
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
 creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
 client = gspread.authorize(creds)
